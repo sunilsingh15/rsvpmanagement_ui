@@ -6,8 +6,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.validation.Valid;
 import sg.sunilsingh.rsvpmanagement_ui.model.RSVP;
@@ -29,6 +31,26 @@ public class RSVPUIController {
     public String viewAllRSVPs(Model model) {
         model.addAttribute("rsvpList", service.retrieveAllRSVPs());
         return "view";
+    }
+
+    @GetMapping("/search")
+    public String showSearchPage() {
+        return "search";
+    }
+
+    @GetMapping("/searchbyid")
+    public String searchByID(@RequestParam int searchID) {
+        if (service.checkIfRSVPExists(searchID)) {
+            return "redirect:/view/" + searchID;
+        } else {
+            return "search";
+        }
+    }
+
+    @GetMapping ("/view/{id}")
+    public String viewRSVP(@PathVariable("id") int id, Model model) {
+        model.addAttribute("rsvp", service.getRSVPByID(id));
+        return "viewRSVP";
     }
 
     @GetMapping("/create")

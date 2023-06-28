@@ -32,4 +32,12 @@ public class RSVPUIService {
         return template.postForEntity(apiURL + "/new", rsvpToAdd, Boolean.class).getBody();
     }
 
+    public Boolean checkIfRSVPExists(int id) {
+        return template.getForEntity(apiURL + "/search/" + id, Boolean.class).getBody();
+    }
+
+    public RSVP getRSVPByID(int id) {
+        return template.getForObject(apiURL + "/rsvp/" + id, RSVP.class);
+    }
+
 }

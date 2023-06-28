@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View RSVP | RSVP Management System</title>
+</head>
+
+<body>
+    <h2>View RSVP</h2>
+
+    <table>
+        <thead>
+            <td>ID</td>
+            <td>Full Name</td>
+            <td>Email</td>
+            <td>Phone Number</td>
+            <td>Confirmation Date</td>
+            <td>Comments</td>
+        </thead>
+        <tr th:object="${rsvp}">
+            <td th:text="*{id}"></td>
+            <td th:text="*{fullName}"></td>
+            <td th:text="*{email}"></td>
+            <td th:text="*{phone}"></td>
+            <td th:text="*{confirmationDate}"></td>
+            <td th:text="*{comments}"></td>
+        </tr>
+    </table>
+</body>
+
+</html>
