@@ -19,7 +19,7 @@ public class RSVPUIService {
 
     public List<RSVP> retrieveAllRSVPs() {
         ResponseEntity<List<RSVP>> response = template.exchange(
-                apiURL + "/view",
+                apiURL + "/rsvps",
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<List<RSVP>>() {
