@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create new RSVP | RSVP Management System</title>
+</head>
+
+<body>
+    <h2>Create a new RSVP</h2>
+
+    <form th:object="${newRSVP}" th:action="@{/create}" method="post">
+        <table>
+            <tr>
+                <td>Full Name:</td>
+                <td>
+                    <input type="text" th:field="*{fullName}">
+                </td>
+                <td>
+                    <span th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}" style="color: red;"></span>
+                </td>
+            </tr>
+
+            <tr>
+                <td>E-mail Address:</td>
+                <td>
+                    <input type="email" th:field="*{email}">
+                </td>
+                <td>
+                    <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" style="color: red;"></span>
+                </td>
+            </tr>
+            
+            <tr>
+                <td>Phone Number:</td>
+                <td>
+                    <input type="tel" th:field="*{phone}">
+                </td>
+                <td>
+                    <span th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" style="color: red;"></span>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Confirmation Date:</td>
+                <td>
+                    <input type="date" th:field="*{confirmationDate}" required>
+                </td>
+                <td>
+                    <span th:if="${#fields.hasErrors('confirmationDate')}" th:errors="*{confirmationDate}"
+                        style="color: red;"></span>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Comments:</td>
+                <td><textarea cols="30" rows="10" th:field="*{comments}"></textarea></td>
+            </tr>
+            
+            <tr>
+                <td></td>
+                <td>
+                    <button type="submit">Create</button>
+                    <input type="reset" value="Clear"></button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+
+</html>

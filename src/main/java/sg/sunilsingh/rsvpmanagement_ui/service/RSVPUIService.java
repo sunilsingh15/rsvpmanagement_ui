@@ -25,7 +25,11 @@ public class RSVPUIService {
                 new ParameterizedTypeReference<List<RSVP>>() {
                 });
 
-                return response.getBody();
+        return response.getBody();
+    }
+
+    public Boolean addNewRSVP(RSVP rsvpToAdd) {
+        return template.postForEntity(apiURL + "/new", rsvpToAdd, Boolean.class).getBody();
     }
 
 }
