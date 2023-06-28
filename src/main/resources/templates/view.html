@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All RSVPs | RSVP Management System</title>
+</head>
+
+<body>
+    <h2>All RSVPs</h2>
+
+    <table>
+        <thead>
+            <td>
+                ID
+            </td>
+            <td>
+                Full Name
+            </td>
+            <td>
+                Email
+            </td>
+            <td>
+                Phone Number
+            </td>
+            <td>
+                Confirmation Date
+            </td>
+            <td>
+                Comments
+            </td>
+        </thead>
+        <tr th:each="rsvp : ${rsvpList}">
+            <td th:text="*{rsvp.id}"></td>
+            <td th:text="*{rsvp.fullName}"></td>
+            <td th:text="*{rsvp.email}"></td>
+            <td th:text="*{rsvp.phone}"></td>
+            <td th:text="*{rsvp.confirmationDate}"></td>
+            <td th:text="*{rsvp.comments}"></td>
+        </tr>
+    </table>
+    <br>
+    <a href="/"><button type="submit">Return Home</button></a>
+</body>
+
+</html>
