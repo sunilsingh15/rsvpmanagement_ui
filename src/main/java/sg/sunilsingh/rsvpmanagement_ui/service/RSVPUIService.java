@@ -2,7 +2,6 @@ package sg.sunilsingh.rsvpmanagement_ui.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -14,8 +13,7 @@ import sg.sunilsingh.rsvpmanagement_ui.model.RSVP;
 @Service
 public class RSVPUIService {
 
-    @Autowired
-    RestTemplate template;
+    RestTemplate template = new RestTemplate();
 
     private final String apiURL = "http://localhost:8080/api";
 
