@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,6 +26,7 @@ public class RSVPAPIController {
     private final String findRSVPByID = "select * from rsvps where id = ?";
     private final String insertRSVP = "insert into rsvps (full_name, email, phone, confirmation_date, comments) values (?, ?, ?, ?, ?)";
     private final String updateRSVP = "update rsvps set full_name = ?, email = ?, phone = ?, confirmation_date = ?, comments = ? where id = ?";
+    private final String deleteRSVP = "delete from rsvps where id = ?";
 
     @GetMapping("/rsvps")
     public List<RSVP> allRSVPs() {
@@ -59,6 +61,15 @@ public class RSVPAPIController {
     public Boolean updateRSVP(@RequestBody RSVP rsvp) {
         if (template.update(updateRSVP, rsvp.getFullName(), rsvp.getEmail(), rsvp.getPhone(),
                 rsvp.getConfirmationDate(), rsvp.getComments(), rsvp.getId()) == 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @DeleteMapping ("/delete/{rsvpID}")
+    public Boolean deleteRSVP(@PathVariable int rsvpID) {
+        if (template.update(deleteRSVP, rsvpID) == 1) {
             return true;
         } else {
             return false;

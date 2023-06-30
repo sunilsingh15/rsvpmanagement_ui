@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -102,5 +103,27 @@ public class RSVPUIController {
         return "error";
     }
 
+    @GetMapping("/delete")
+    public String showDeleteSearchPage() {
+        return "delete";
+    }
+
+    @GetMapping("/deletersvp")
+    public String searchByIDtoDelete(@RequestParam int searchID) {
+        if (service.checkIfRSVPExists(searchID)) {
+            return "redirect:/delete/" + searchID;
+        } else {
+            return "delete";
+        }
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteRSVP(@PathVariable("id") int id) {
+        if (service.deleteRSVPbyID(id)) {
+            return "deleted";
+        } else {
+            return "error";
+        }
+    }
     
 }

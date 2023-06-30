@@ -44,4 +44,9 @@ public class RSVPUIService {
         return template.postForEntity(apiURL + "/update", rsvpToUpdate, Boolean.class).getBody();
     }
 
+    public Boolean deleteRSVPbyID(int rsvpID) {
+        template.delete(apiURL + "/delete/" + rsvpID);
+        return true;
+    }
+
 }
