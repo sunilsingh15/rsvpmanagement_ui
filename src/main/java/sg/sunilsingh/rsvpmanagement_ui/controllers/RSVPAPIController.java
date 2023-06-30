@@ -24,6 +24,7 @@ public class RSVPAPIController {
     private final String getAllRSVPs = "select * from rsvps";
     private final String findRSVPByID = "select * from rsvps where id = ?";
     private final String insertRSVP = "insert into rsvps (full_name, email, phone, confirmation_date, comments) values (?, ?, ?, ?, ?)";
+    private final String updateRSVP = "update rsvps set full_name = ?, email = ?, phone = ?, confirmation_date = ?, comments = ? where id = ?";
 
     @GetMapping("/rsvps")
     public List<RSVP> allRSVPs() {
@@ -52,6 +53,16 @@ public class RSVPAPIController {
     @GetMapping("/rsvp/{rsvpID}")
     public RSVP getRSVPByID(@PathVariable("rsvpID") int id) {
         return template.queryForObject(findRSVPByID, BeanPropertyRowMapper.newInstance(RSVP.class), id);
+    }
+
+    @PostMapping("/update")
+    public Boolean updateRSVP(@RequestBody RSVP rsvp) {
+        if (template.update(updateRSVP, rsvp.getFullName(), rsvp.getEmail(), rsvp.getPhone(),
+                rsvp.getConfirmationDate(), rsvp.getComments(), rsvp.getId()) == 1) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

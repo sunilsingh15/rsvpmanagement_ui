@@ -40,4 +40,8 @@ public class RSVPUIService {
         return template.getForObject(apiURL + "/rsvp/" + id, RSVP.class);
     }
 
+    public Boolean updateRSVP(RSVP rsvpToUpdate) {
+        return template.postForEntity(apiURL + "/update", rsvpToUpdate, Boolean.class).getBody();
+    }
+
 }

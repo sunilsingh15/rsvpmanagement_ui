@@ -73,5 +73,34 @@ public class RSVPUIController {
         return "error";
     }
 
+    @GetMapping("/update")
+    public String showUpdateSearchPage() {
+        return "update";
+    }
+
+    @GetMapping("/updatersvp")
+    public String searchByIDtoUpdate(@RequestParam int searchID) {
+        if (service.checkIfRSVPExists(searchID)) {
+            return "redirect:/update/" + searchID;
+        } else {
+            return "update";
+        }
+    }
+
+    @GetMapping("/update/{id}")
+    public String updateRSVP(@PathVariable("id") int id, Model model) {
+        model.addAttribute("rsvp", service.getRSVPByID(id));
+        return "updateRSVP";
+    }
+
+    @PostMapping("/update")
+    public String updateRSVPtoDB(@ModelAttribute("rsvp") RSVP rsvpToUpdate) {
+        System.out.println(rsvpToUpdate);
+        if (service.updateRSVP(rsvpToUpdate)) {
+            return "updated";
+        }
+        return "error";
+    }
+
     
 }
